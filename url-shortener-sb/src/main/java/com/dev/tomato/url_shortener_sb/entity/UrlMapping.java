@@ -1,8 +1,9 @@
-package com.dev.tomato.url_shortner_sb.entity;
+package com.dev.tomato.url_shortener_sb.entity;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -11,6 +12,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,13 +22,18 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
+@Builder
 public class UrlMapping {
 
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
+
+    @Column(unique = true)
     private String originalUrl;
+
+    @Column(unique = true)
     private String shortUrl;
     private int clickCount=0;
 

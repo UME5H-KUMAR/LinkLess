@@ -1,4 +1,4 @@
-package com.dev.tomato.url_shortner_sb;
+package com.dev.tomato.url_shortener_sb;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

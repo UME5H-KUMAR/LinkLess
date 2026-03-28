@@ -1,4 +1,4 @@
-package com.dev.tomato.url_shortner_sb.entity;
+package com.dev.tomato.url_shortener_sb.entity;
 
 import java.time.LocalDateTime;
 

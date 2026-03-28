@@ -1,4 +1,4 @@
-package com.dev.tomato.url_shortner_sb.entity.type;
+package com.dev.tomato.url_shortener_sb.entity.type;
 
 public enum RoleType {
 
