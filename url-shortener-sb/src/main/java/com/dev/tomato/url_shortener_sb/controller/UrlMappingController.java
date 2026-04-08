@@ -12,7 +12,6 @@ import com.dev.tomato.url_shortener_sb.service.UserService;
 import lombok.RequiredArgsConstructor;
 
 import java.security.Principal;
-import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
