@@ -1,7 +1,8 @@
 package com.dev.tomato.url_shortener_sb.service;
 
 import java.util.Collection;
-import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.jspecify.annotations.Nullable;
 import org.springframework.security.core.GrantedAuthority;
@@ -36,14 +37,16 @@ public class UserDetailsImpl implements UserDetails{
     // build UserDetailsImpl from User entity
     public static UserDetailsImpl build(User user){
 
-        GrantedAuthority authority= new SimpleGrantedAuthority(user.getRoles().toString());
+        List<GrantedAuthority> authorities = user.getRoles().stream()
+            .map(role -> new SimpleGrantedAuthority("ROLE_" + role.name()))
+            .collect(Collectors.toList());
 
         return new UserDetailsImpl(
             user.getId(),
             user.getUsername(),
             user.getEmail(),
             user.getPassword(),
-            Collections.singletonList(authority)
+            authorities
         );
 
         
