@@ -8,6 +8,7 @@ import java.util.Random;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -117,5 +118,23 @@ public class UrlMappingService {
         clickEventRepository.save(clickEvent);
 
         return urlMapping;
+    }
+
+    @Transactional
+    public boolean deleteUrl(Long id, User user) {
+        UrlMapping urlMapping = urlMappingRepository.findById(id).orElse(null);
+
+        if (urlMapping == null) {
+            return false;
+        }
+
+        if (!urlMapping.getUser().getId().equals(user.getId())) {
+            throw new AccessDeniedException("You are not allowed to delete this URL.");
+        }
+
+        clickEventRepository.deleteByUrlMapping(urlMapping);
+        urlMappingRepository.delete(urlMapping);
+
+        return true;
     }
 }

@@ -22,6 +22,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -106,6 +107,20 @@ public class UrlMappingController {
         return ResponseEntity.ok(totalClicks);
 
         
+    }
+
+    @DeleteMapping("/{urlId}")
+    @PreAuthorize("hasRole('USER')")
+    public ResponseEntity<Void> deleteUrl(@PathVariable Long urlId, Principal principal) {
+        User user = userService.findByUsername(principal.getName());
+
+        boolean deleted = urlMappingService.deleteUrl(urlId, user);
+
+        if (!deleted) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.noContent().build();
     }
     
 

@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Shorten your URL with analytics support." />
+    <title>Linkless | URL Shortener With Analytics</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <section id="authView" class="auth-layout">
+        <div class="auth-copy">
+          <p class="brand-mark">Linkless</p>
+          <p class="eyebrow">URL shortener with analytics</p>
+          <h1>Share cleaner links and understand every click.</h1>
+          <p class="intro">Linkless turns long URLs into compact, trackable links with a simple dashboard for click history and date-range analytics.</p>
+          <div class="value-grid">
+            <article><strong>Fast shortening</strong><span>Create compact links for campaigns, documents, profiles, and everyday sharing.</span></article>
+            <article><strong>Click tracking</strong><span>See lifetime clicks and inspect link activity inside a selected date range.</span></article>
+            <article><strong>Private dashboard</strong><span>Sign in to manage only your own links and analytics history.</span></article>
+          </div>
+        </div>
+
+        <form id="authForm" class="panel auth-card">
+          <div><h2>Welcome to Linkless</h2><p class="form-note">Login or create an account to manage your short links.</p></div>
+          <div class="mode-tabs" aria-label="Authentication mode">
+            <button type="button" id="loginTab" class="active">Login</button>
+            <button type="button" id="signupTab">Sign up</button>
+          </div>
+          <label>Username<input id="username" name="username" type="text" autocomplete="username" required /></label>
+          <label id="emailGroup" class="hidden">Email<input id="email" name="email" type="email" autocomplete="email" /></label>
+          <label>Password<input id="password" name="password" type="password" autocomplete="current-password" required /></label>
+          <button id="authSubmit" class="primary-button" type="submit">Login</button>
+        </form>
+      </section>
+
+      <section id="dashboardView" class="hidden">
+        <header class="topbar">
+          <div><p id="signedInLabel" class="eyebrow">Signed in</p><h1>Linkless dashboard</h1></div>
+          <button id="logoutButton" class="secondary-button" type="button">Logout</button>
+        </header>
+        <main class="dashboard-grid">
+          <section class="panel">
+            <div class="panel-heading"><div><h2>Create a Linkless URL</h2><p>Paste a destination link and generate a trackable short link.</p></div></div>
+            <form id="shortenForm" class="stack">
+              <label>Original URL<input id="originalUrl" type="url" placeholder="https://example.com/a/very/long/link" required /></label>
+              <button id="shortenSubmit" class="primary-button" type="submit">Shorten URL</button>
+            </form>
+          </section>
+          <section class="panel">
+            <div class="panel-heading"><div><h2>Your links</h2><p>Select a link to inspect its analytics.</p></div><button id="refreshUrls" class="secondary-button compact" type="button">Refresh</button></div>
+            <div id="urlList" class="url-list"></div>
+          </section>
+          <section class="panel analytics-panel">
+            <div class="panel-heading"><div><h2>Analytics</h2><p>Choose a date range to review recorded redirect clicks.</p></div><span id="selectedShortUrl">No URL selected</span></div>
+            <div class="analytics-controls">
+              <label>Start date<input id="startDate" type="date" /></label>
+              <label>End date<input id="endDate" type="date" /></label>
+              <button id="loadAnalytics" class="primary-button" type="button">Load analytics</button>
+            </div>
+            <div class="stats-row">
+              <article><span>Total clicks in range</span><strong id="totalClickCount">0</strong></article>
+              <article><span>Click events</span><strong id="eventCount">0</strong></article>
+            </div>
+            <div id="analyticsList" class="metric-list"></div>
+          </section>
+        </main>
+      </section>
+    </div>
+    <div id="toast" class="toast hidden" role="status" aria-live="polite"></div>
+    <script src="config.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
